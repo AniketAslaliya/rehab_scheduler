@@ -5,7 +5,7 @@ for all 3 task difficulty levels. Seeded for reproducibility.
 """
 
 import random
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from models import InmateProfile, ProgramType
 
 
@@ -42,8 +42,6 @@ def _make_inmate(
     force_conflict_with: Optional[List[str]] = None,
 ) -> InmateProfile:
     """Generate one inmate with realistic attributes."""
-    from typing import Optional  # local import to avoid circular at module level
-
     inmate_id = f"I-{idx:03d}"
     age = rng.randint(18, 55)
     offence = rng.choice(OFFENCE_CATEGORIES)

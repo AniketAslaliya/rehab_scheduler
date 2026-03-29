@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 from openenv.core.env_server import create_fastapi_app
-from rehab_environment import RehabEnvironment
+from server.rehab_environment import RehabEnvironment
 from models import RehabAction, RehabObservation, ActionType, ProgramType
 
 
