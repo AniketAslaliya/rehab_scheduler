@@ -26,7 +26,7 @@ import httpx
 # ─────────────────────────────────────────────
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
-ENV_BASE_URL   = os.environ.get("REHAB_ENV_URL", "http://localhost:8000")
+ENV_BASE_URL   = os.environ.get("REHAB_ENV_URL", "https://AniketAsla-rehab-scheduler.hf.space")
 MODEL          = "gpt-4o"
 SEED           = 42
 
