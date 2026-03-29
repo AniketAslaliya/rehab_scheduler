@@ -155,9 +155,9 @@ python baseline_agent.py
 
 | Task | Difficulty | Baseline (GPT-4o greedy) |
 |---|---|---|
-| 1 | Easy | ~0.82 |
-| 2 | Medium | ~0.61 |
-| 3 | Hard | ~0.44 |
+| 1 | Easy | 0.8293 |
+| 2 | Medium | 0.3105 |
+| 3 | Hard | 0.1690 |
 
 ---
 

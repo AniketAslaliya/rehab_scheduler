@@ -24,6 +24,29 @@ from models import RehabAction, RehabObservation, ActionType, ProgramType
 app = create_fastapi_app(RehabEnvironment, RehabAction, RehabObservation)
 
 
+def _remove_route(path: str, method: str) -> None:
+    """Remove an auto-generated route so custom handlers can own that path."""
+    method = method.upper()
+    app.router.routes = [
+        route
+        for route in app.router.routes
+        if not (
+            getattr(route, "path", None) == path
+            and method in getattr(route, "methods", set())
+        )
+    ]
+
+
+# Override OpenEnv default HTTP handlers with explicit stateful endpoints.
+for _path, _method in [
+    ("/health", "GET"),
+    ("/reset", "POST"),
+    ("/step", "POST"),
+    ("/state", "GET"),
+]:
+    _remove_route(_path, _method)
+
+
 # ─────────────────────────────────────────────
 # Hackathon-required extra endpoints
 # ─────────────────────────────────────────────
@@ -120,6 +143,29 @@ async def list_tasks():
 class GraderRequest(BaseModel):
     task_id: int = 1
     seed:    int = 42
+
+
+class ResetRequest(BaseModel):
+    task_id: int = 1
+    seed: int = 42
+
+
+@app.post("/reset")
+async def reset(request: ResetRequest):
+    """Reset the singleton environment and return the initial observation."""
+    return _env.reset(task_id=request.task_id, seed=request.seed)
+
+
+@app.post("/step")
+async def step(action: RehabAction):
+    """Apply one action to the active episode and return updated observation."""
+    return _env.step(action)
+
+
+@app.get("/state")
+async def state():
+    """Expose episode-level metadata for the active singleton environment."""
+    return _env.state
 
 
 @app.post("/grader")
