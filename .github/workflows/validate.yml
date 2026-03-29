@@ -1,0 +1,42 @@
+name: Validate Environment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r server/requirements.txt pytest
+
+      - name: Syntax check all Python files
+        run: |
+          python -m py_compile models.py
+          python -m py_compile case_generator.py
+          python -m py_compile client.py
+          python -m py_compile baseline_agent.py
+          python -m py_compile server/app.py
+          python -m py_compile server/rehab_environment.py
+          echo "All syntax checks passed"
+
+      - name: Run unit and integration tests
+        run: pytest tests/ -v
+
+      - name: Start server and verify /health
+        run: |
+          uvicorn server.app:app --port 8000 &
+          sleep 5
+          curl -f http://localhost:8000/health
+          curl -f http://localhost:8000/tasks
+          echo "Server endpoints verified"
