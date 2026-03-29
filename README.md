@@ -111,7 +111,7 @@ The grader compares the agent's total risk reduction to an oracle greedy optimal
 
 ```bash
 pip install openenv-core
-git clone https://github.com/YOUR_USERNAME/rehab-scheduler
+git clone https://github.com/AniketAslaliya/rehab-scheduler
 cd rehab-scheduler
 pip install -e .
 ```
@@ -201,4 +201,4 @@ rehab_scheduler/
 
 - [Environment Hub](https://huggingface.co/collections/openenv/environment-hub)
 - [OpenEnv GitHub](https://github.com/meta-pytorch/OpenEnv)
-- [Deployed Space](https://huggingface.co/spaces/YOUR_USERNAME/rehab-scheduler)
+- [Deployed Space](https://huggingface.co/spaces/AniketAslaliya/rehab-scheduler)
