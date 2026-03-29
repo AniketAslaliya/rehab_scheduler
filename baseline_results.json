@@ -1,0 +1,34 @@
+﻿{
+    "baseline_agent":  "greedy_priority",
+    "description":  "Assigns highest-risk unassigned inmate to first available slot each step",
+    "scores":  {
+                   "task_1":  {
+                                  "task_id":  1,
+                                  "seed":  42,
+                                  "grader_score":  0.8293,
+                                  "steps_taken":  21,
+                                  "violations":  0,
+                                  "assignments":  20,
+                                  "final_avg_risk":  4.088
+                              },
+                   "task_2":  {
+                                  "task_id":  2,
+                                  "seed":  42,
+                                  "grader_score":  0.3105,
+                                  "steps_taken":  80,
+                                  "violations":  0,
+                                  "assignments":  6,
+                                  "final_avg_risk":  5.437
+                              },
+                   "task_3":  {
+                                  "task_id":  3,
+                                  "seed":  42,
+                                  "grader_score":  0.169,
+                                  "steps_taken":  200,
+                                  "violations":  0,
+                                  "assignments":  2,
+                                  "final_avg_risk":  6.505
+                              }
+               },
+    "note":  "Full OpenAI-based baseline in baseline_agent.py"
+}
