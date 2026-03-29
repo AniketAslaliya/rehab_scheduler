@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "rehab-scheduler"
+version = "1.0.0"
+description = "Prison Rehabilitation Program Scheduler — OpenEnv RL Environment"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "openenv-core>=0.2.2",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.25.0",
+    "openai>=1.0.0",
+]
+
+[project.scripts]
+rehab-server = "server.app:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rehab_scheduler*", "server*"]

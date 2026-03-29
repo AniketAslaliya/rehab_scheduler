@@ -1,0 +1,44 @@
+name: rehab_scheduler
+version: "1.0.0"
+description: >
+  Prison Rehabilitation Program Scheduler — an RL environment where an agent
+  acts as a program director, assigning inmates to rehabilitation programs
+  (education, therapy, vocational, substance abuse, anger management) to
+  minimize recidivism risk across the entire population.
+
+author: NOT_FOUND_101
+license: MIT
+
+environment:
+  class: RehabEnvironment
+  module: server.rehab_environment
+
+tasks:
+  - id: 1
+    name: Basic Allocation
+    difficulty: easy
+    max_steps: 40
+  - id: 2
+    name: Constrained Scheduling
+    difficulty: medium
+    max_steps: 80
+  - id: 3
+    name: Crisis Reoptimization
+    difficulty: hard
+    max_steps: 200
+
+server:
+  host: 0.0.0.0
+  port: 8000
+  workers: 2
+  dockerfile: server/Dockerfile
+
+endpoints:
+  health:   /health
+  tasks:    /tasks
+  grader:   /grader
+  baseline: /baseline
+  reset:    /reset
+  step:     /step
+  state:    /state
+  websocket: /ws
