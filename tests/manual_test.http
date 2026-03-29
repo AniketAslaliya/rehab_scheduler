@@ -1,0 +1,83 @@
+### Health
+GET http://localhost:8000/health
+
+###
+
+### List Tasks (hackathon required)
+GET http://localhost:8000/tasks
+
+###
+
+### Reset Task 1
+POST http://localhost:8000/reset
+Content-Type: application/json
+
+{
+  "task_id": 1,
+  "seed": 42
+}
+
+###
+
+### Assign first inmate to therapy
+POST http://localhost:8000/step
+Content-Type: application/json
+
+{
+  "action_type": "assign_program",
+  "inmate_id": "I-001",
+  "program_type": "therapy"
+}
+
+###
+
+### Submit schedule (terminal action)
+POST http://localhost:8000/step
+Content-Type: application/json
+
+{
+  "action_type": "submit_schedule"
+}
+
+###
+
+### Get State
+GET http://localhost:8000/state
+
+###
+
+### Run Grader (hackathon required)
+POST http://localhost:8000/grader
+Content-Type: application/json
+
+{
+  "task_id": 1,
+  "seed": 42
+}
+
+###
+
+### Run Baseline (hackathon required)
+GET http://localhost:8000/baseline
+
+###
+
+### Reset Task 2
+POST http://localhost:8000/reset
+Content-Type: application/json
+
+{
+  "task_id": 2,
+  "seed": 42
+}
+
+###
+
+### Reset Task 3
+POST http://localhost:8000/reset
+Content-Type: application/json
+
+{
+  "task_id": 3,
+  "seed": 42
+}
