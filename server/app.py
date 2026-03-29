@@ -243,3 +243,14 @@ async def run_baseline():
 @app.get("/health")
 async def health():
     return {"status": "healthy", "environment": "rehab_scheduler", "version": "1.0.0"}
+
+
+def main() -> None:
+    """CLI entrypoint for local run and OpenEnv validation checks."""
+    import uvicorn
+
+    uvicorn.run("server.app:app", host="0.0.0.0", port=8000)
+
+
+if __name__ == "__main__":
+    main()

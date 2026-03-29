@@ -1,10 +1,10 @@
 """
 Rehabilitation Scheduler — Baseline Inference Script
-Uses the OpenAI API client to run GPT-4o as an agent
+Uses Gemini (via OpenAI-compatible API) by default to run a baseline agent
 against all 3 tasks and produces reproducible scores.
 
 Usage:
-    export OPENAI_API_KEY=sk-...
+    export GEMINI_API_KEY=your-gemini-api-key
     export REHAB_ENV_URL=https://YOUR_USERNAME-rehab-scheduler.hf.space
     python baseline_agent.py
 
@@ -25,9 +25,16 @@ import httpx
 # Config
 # ─────────────────────────────────────────────
 
+# Gemini is preferred. OPENAI_API_KEY remains as backward-compatible fallback.
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+LLM_API_KEY    = GEMINI_API_KEY or OPENAI_API_KEY
+LLM_BASE_URL   = os.environ.get(
+    "LLM_BASE_URL",
+    "https://generativelanguage.googleapis.com/v1beta/openai/",
+)
 ENV_BASE_URL   = os.environ.get("REHAB_ENV_URL", "https://AniketAsla-rehab-scheduler.hf.space")
-MODEL          = "gpt-4o"
+MODEL          = os.environ.get("LLM_MODEL", "gemini-2.0-flash")
 SEED           = 42
 
 # ─────────────────────────────────────────────
@@ -133,10 +140,10 @@ If no more useful assignments exist, submit: {{"action_type": "submit_schedule"}
 
 def run_task(task_id: int, verbose: bool = True) -> dict:
     """Run one full episode for a given task. Returns result dict."""
-    if not OPENAI_API_KEY:
-        raise ValueError("OPENAI_API_KEY environment variable not set.")
+    if not LLM_API_KEY:
+        raise ValueError("Set GEMINI_API_KEY (or OPENAI_API_KEY as fallback).")
 
-    oai = OpenAI(api_key=OPENAI_API_KEY)
+    oai = OpenAI(api_key=LLM_API_KEY, base_url=LLM_BASE_URL)
     env = RehabEnvClient(ENV_BASE_URL)
 
     print(f"\n{'='*60}")
@@ -154,13 +161,12 @@ def run_task(task_id: int, verbose: bool = True) -> dict:
         user_msg = build_user_message(obs)
         messages.append({"role": "user", "content": user_msg})
 
-        # Call OpenAI
+        # Call LLM through OpenAI-compatible API (Gemini by default).
         response = oai.chat.completions.create(
             model=MODEL,
             messages=messages,
             temperature=0.0,
             seed=SEED,
-            response_format={"type": "json_object"},
             max_tokens=200,
         )
 
