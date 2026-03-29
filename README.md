@@ -1,3 +1,12 @@
+---
+title: Rehab Scheduler
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 8000
+pinned: false
+---
+
 # Rehabilitation Program Scheduler — OpenEnv Environment
 
 An RL environment where an AI agent acts as a prison rehabilitation program director,
@@ -201,4 +210,4 @@ rehab_scheduler/
 
 - [Environment Hub](https://huggingface.co/collections/openenv/environment-hub)
 - [OpenEnv GitHub](https://github.com/meta-pytorch/OpenEnv)
-- [Deployed Space](https://huggingface.co/spaces/AniketAslaliya/rehab-scheduler)
+- [Deployed Space](https://huggingface.co/spaces/AniketAsla/rehab-scheduler)
