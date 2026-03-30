@@ -1,0 +1,35 @@
+{
+  "task_1": {
+    "task_id": 1,
+    "seed": 42,
+    "baseline_agent": "deterministic_greedy_affinity",
+    "steps_taken": 21,
+    "final_score": 0.9389,
+    "total_assignments": 20,
+    "total_violations": 0,
+    "current_avg_risk": 3.783,
+    "initial_avg_risk": 5.452
+  },
+  "task_2": {
+    "task_id": 2,
+    "seed": 42,
+    "baseline_agent": "deterministic_greedy_affinity",
+    "steps_taken": 31,
+    "final_score": 0.9845,
+    "total_assignments": 30,
+    "total_violations": 0,
+    "current_avg_risk": 4.693,
+    "initial_avg_risk": 5.605
+  },
+  "task_3": {
+    "task_id": 3,
+    "seed": 42,
+    "baseline_agent": "deterministic_greedy_affinity",
+    "steps_taken": 116,
+    "final_score": 0.8464,
+    "total_assignments": 115,
+    "total_violations": 0,
+    "current_avg_risk": 5.569,
+    "initial_avg_risk": 6.655
+  }
+}

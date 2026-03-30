@@ -77,6 +77,14 @@ def test_grader_endpoint():
     assert 0.0 <= data["grader_score"] <= 1.0
 
 
+def test_baseline_endpoint():
+    r = client.get("/baseline")
+    assert r.status_code == 200
+    data = r.json()
+    assert data["baseline_agent"] == "deterministic_greedy_affinity"
+    assert set(data["scores"].keys()) == {"task_1", "task_2", "task_3"}
+
+
 def test_state_after_steps():
     client.post("/reset", json={"task_id": 1, "seed": 42})
     client.post(

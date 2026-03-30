@@ -120,8 +120,8 @@ The grader compares the agent's total risk reduction to an oracle greedy optimal
 
 ```bash
 pip install openenv-core
-git clone https://github.com/AniketAslaliya/rehab-scheduler
-cd rehab-scheduler
+git clone https://github.com/Mitalimehta02/rehab_scheduler
+cd rehab_scheduler
 pip install -e .
 ```
 
@@ -153,8 +153,13 @@ with RehabEnv(base_url="http://localhost:8000").sync() as env:
 
 ### Run baseline agent
 ```bash
-export OPENAI_API_KEY=sk-...
 export REHAB_ENV_URL=http://localhost:8000
+python baseline_agent.py
+```
+
+PowerShell:
+```powershell
+$env:REHAB_ENV_URL="http://localhost:8000"
 python baseline_agent.py
 ```
 
@@ -162,11 +167,11 @@ python baseline_agent.py
 
 ## Baseline Scores
 
-| Task | Difficulty | Baseline (GPT-4o greedy) |
+| Task | Difficulty | Baseline (deterministic greedy affinity) |
 |---|---|---|
-| 1 | Easy | 0.8293 |
-| 2 | Medium | 0.3105 |
-| 3 | Hard | 0.1690 |
+| 1 | Easy | 0.9389 |
+| 2 | Medium | 0.9845 |
+| 3 | Hard | 0.8464 |
 
 ---
 
@@ -182,7 +187,6 @@ python baseline_agent.py
 | `/grader` | POST | Run grader on completed episode |
 | `/baseline` | GET | Run baseline agent on all 3 tasks |
 | `/ws` | WebSocket | Persistent session interface |
-| `/web` | GET | Interactive web UI |
 | `/docs` | GET | Auto-generated API docs |
 
 ---
